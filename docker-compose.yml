@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - microservices-net
+
+  order-service:
+    build:
+      context: .
+      dockerfile: order-service/Dockerfile
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/order-db
+    depends_on:
+      - mongo
+    networks:
+      - microservices-net
+    volumes:
+      - ~/.m2:/root/.m2
+
+  user-service:
+    build:
+      context: .
+      dockerfile: user-service/Dockerfile
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/user-db
+    depends_on:
+      - mongo
+    networks:
+      - microservices-net
+    volumes:
+      - ~/.m2:/root/.m2
+
+networks:
+  microservices-net:
+    driver: bridge
+
+volumes:
+  mongo-data:
