@@ -1,4 +1,4 @@
-package entity;
+package com.example.userservice.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,12 +11,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document(collection = "orders")
-public class Order {
+@Document(collection = "users")
+public class User {
 
     @Id
-    private String orderId;
     private String userId;
-    private double totalAmount;
-    private String status;
+    private String name;
+    private String email;
+    private int age;
 }

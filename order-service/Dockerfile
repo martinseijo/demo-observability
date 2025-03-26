@@ -1,11 +1,9 @@
 FROM maven:3.9.9-eclipse-temurin-21 AS builder
 WORKDIR /app
 
-# Copy the parent POM and the order-service POM
+# Copy the POM and source code
 COPY pom.xml /app/pom.xml
 COPY order-service/pom.xml /app/order-service/pom.xml
-
-# Copy the source code of order-service
 COPY order-service/src /app/order-service/src
 
 # Build the order-service module

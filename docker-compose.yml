@@ -1,44 +1,48 @@
 version: '3.8'
-
 services:
   mongo:
     image: mongo:latest
-    container_name: mongodb
+    container_name: mongo
     ports:
       - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
     volumes:
       - mongo-data:/data/db
     networks:
-      - microservices-net
+      - app-network
 
   order-service:
     build:
       context: .
       dockerfile: order-service/Dockerfile
-    environment:
-      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/order-db
+    container_name: order-service
+    ports:
+      - "8081:8080"
+    networks:
+      - app-network
     depends_on:
       - mongo
-    networks:
-      - microservices-net
-    volumes:
-      - ~/.m2:/root/.m2
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://root:rootpassword@mongo:27017/orderdb?authSource=admin
 
   user-service:
     build:
       context: .
       dockerfile: user-service/Dockerfile
-    environment:
-      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/user-db
+    container_name: user-service
+    ports:
+      - "8082:8080"
+    networks:
+      - app-network
     depends_on:
       - mongo
-    networks:
-      - microservices-net
-    volumes:
-      - ~/.m2:/root/.m2
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://root:rootpassword@mongo:27017/userdb?authSource=admin
 
 networks:
-  microservices-net:
+  app-network:
     driver: bridge
 
 volumes:

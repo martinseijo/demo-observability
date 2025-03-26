@@ -1,8 +1,12 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://mongo:27017/order-db
+      uri: mongodb://root:rootpassword@mongo:27017/orderdb?authSource=admin
   application:
     name: order-service
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
 server:
   port: 8081

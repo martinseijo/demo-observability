@@ -1,10 +1,10 @@
-package controller;
+package com.example.userservice.controller;
 
-import entity.User;
+import com.example.userservice.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.UserService;
+import com.example.userservice.service.UserService;
 
 import java.util.List;
 

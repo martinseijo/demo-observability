@@ -1,10 +1,10 @@
-package controller;
+package com.example.orderservice.controller;
 
-import entity.Order;
+import com.example.orderservice.entity.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.OrderService;
+import com.example.orderservice.service.OrderService;
 
 import java.util.List;
 

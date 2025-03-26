@@ -1,9 +1,9 @@
-package service;
+package com.example.orderservice.service;
 
-import entity.Order;
+import com.example.orderservice.entity.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import repository.OrderRepository;
+import com.example.orderservice.repository.OrderRepository;
 
 import java.util.List;
 import java.util.Optional;
