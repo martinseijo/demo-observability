@@ -2,3 +2,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://mongo:27017/user-db
+  application:
+    name: user-service
+server:
+  port: 8082
